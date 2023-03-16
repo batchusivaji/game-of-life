@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { label 'JDK_8' }
     triggers { 
         pollSCM ('* * * * *') 
     }
@@ -12,7 +12,6 @@ pipeline {
         }
         stage ('package') {
             steps {
-                sh 'export PATH="/usr/lib/jvm/java-8-openjdk-amd64/bin:$PATH"'
                 sh 'mvn package'
             }
         }
