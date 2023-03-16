@@ -1,5 +1,8 @@
-pipeline{
-    agent { pollSCM '* * * * *' }
+pipeline {
+    agent any
+    triggers { 
+        pollSCM ('* * * * *') 
+    }
     stages {
         stage('vcs') {
             steps {
@@ -19,7 +22,6 @@ pipeline{
                                  onlyIfSuccessful: true
                 junit testResults: '**/surefire-reports/TEST-*.xml'
             }
-        }
-           
+        }     
     }
 }    
