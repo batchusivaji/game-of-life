@@ -10,14 +10,14 @@ pipeline {
                     branch: 'master'
             }
         }
-        stage ('package') {
+        stage('package') {
             steps {
                 sh 'mvn package'
             }
         }
-        stage ( 'post build' ) {
+        stage( 'post build' ) {
             steps {
-                archiveArtifacts artifacts: '**/target/gameoflife.war',
+                archiveArtifacts artifacts: '**/target/*.war',
                                  onlyIfSuccessful: true
                 junit testResults: '**/surefire-reports/TEST-*.xml'
             }
