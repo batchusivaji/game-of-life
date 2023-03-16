@@ -1,5 +1,5 @@
 pipeline{
-    agent { POLLSCM '* * * * *'}
+    agent { pollSCM '* * * * *' }
     stages {
         stage('vcs') {
             steps {
