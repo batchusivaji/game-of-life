@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'JDK_8' }
+    agent { label 'JDK_NODE' }
     triggers { 
         pollSCM ('* * * * *') 
     }
@@ -11,11 +11,14 @@ pipeline {
             }
         }
         stage('package') {
+            tools {
+                jdk 'JDK_8'
+            }
             steps {
                 sh 'mvn package'
             }
         }
-        stage( 'post build' ) {
+        stage( 'artifacts' ) {
             steps {
                 archiveArtifacts artifacts: '**/target/*.war',
                                  onlyIfSuccessful: true
@@ -24,3 +27,4 @@ pipeline {
         }     
     }
 }    
+ 
